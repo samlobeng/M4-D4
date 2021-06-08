@@ -16,3 +16,8 @@ code {
 width: 5px;
 
 }
+
+#images{
+  max-width: 80%;
+  max-height: auto;
+}
