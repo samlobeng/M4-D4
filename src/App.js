@@ -9,6 +9,7 @@ import fantasy from "./data/fantasy.json";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import SignIn from "./components/SignIn";
 import Registration from "./components/Registration";
+import Successful from "./components/Successful";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
             <Switch>
               <Route path="/sign-in" component={SignIn} />
               <Route path="/register" component={Registration} />
+              <Route path="/success" component={Successful} />
             </Switch>
           </div>
         </div>

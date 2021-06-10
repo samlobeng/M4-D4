@@ -1,11 +1,15 @@
-import React from "React";
+import React, { Component } from "react";
 import { Alert } from "react-bootstrap";
 
-const Successful = () => (
-  <Alert variant="success">
+class Successful extends Component{
+    render(){
+        return (
+<Alert variant="success">
     <Alert.Heading>Success</Alert.Heading>
     <p>Your Registration was successful</p>
     <hr />
   </Alert>
-);
+        )
+    }
+}
 export default Successful;

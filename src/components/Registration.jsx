@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Successful from "./Successful";
-
+import  { Redirect } from 'react-router-dom'
 export default class Registration extends Component {
 
     state={
@@ -10,7 +10,7 @@ export default class Registration extends Component {
             email: '',
             password: '',
             confirmPassword: '',
-            errors: ''
+            errors: {}
         }
     }
 
@@ -30,32 +30,27 @@ export default class Registration extends Component {
     formValidation(){
 
         let formIsValid = true;
+        let errors = {};
 
         if(this.state.user.password !== this.state.user.confirmPassword){
-            this.setState({
-                errors: "Passwords do not match"
-            })
+          errors["password"] = "Passwords do not match"
             formIsValid = false;
         }
 
         if(this.state.user.password.length < 8){
-            this.setState({
-                errors: "Passwords should be greater than 8"
-            })
             formIsValid = false;
+            errors["password"] = "Passwords should be greater than 8"
+            
         }
-        if(this.state.user.password.length < 8){
-            this.setState({
-                errors: "Passwords should be greater than 8"
-            })
-        }
-        formIsValid = false;
+        this.setState({errors: errors});
+        return formIsValid;
+    
     }
 
     submitRegistration(e){
         e.preventDefault();
         if(this.formValidation()){
-          <Successful/>
+            this.props.history.push('/success')
         }else{
           alert("Form has errors.")
         }
@@ -116,6 +111,7 @@ export default class Registration extends Component {
                      onChange={e => this.inputChange(e)}
                      required
                     />
+                    <span className="error">{this.state.user.errors["password"]}</span>
                 </div>
 
                 <button type="submit" className="btn btn-primary btn-block">Register</button>
