@@ -6,48 +6,41 @@ import Horror from "../data/horror.json";
 import Romance from "../data/romance.json";
 import Scifi from "../data/scifi.json";
 import BookList from "./BookList";
-
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import SingleBook from "./SingleBook";
+import Registration from "./Registration";
+import SignIn from "./SignIn";
 class MyNav extends Component {
-  state = {
-    selectedCatName: null,
-    selectedCategory: null,
-  };
-
-  categories = {
-    Fantasy: Fantasy,
-    Horror: Horror,
-    Romance: Romance,
-    Scifi: Scifi,
-  };
 
   render() {
-    return (
-      <Navbar collapseOnSelect expand="lg" bg="warning" variant="light">
-        <Container>
-          <Navbar.Brand href="#home">Book App</Navbar.Brand>
-          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-          <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav className="ml-auto">
-              {Object.keys(this.categories).map((cat, i) => {
-                return (
-                  <Nav.Link
-                    onClick={() =>
-                      this.setState({
-                        selectedCategory: this.categories[cat],
-                        selectedCatName: cat,
-                      })
-                    }
-                  >
-                    {cat}
-                  </Nav.Link>
-                );
-              })}
-            </Nav>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
-    
-    );
+    return (<Router>
+      <div className="App">
+        <nav className="navbar navbar-expand-lg navbar-light fixed-top">
+          <div className="container">
+            <Link className="navbar-brand" to="/">StriveBook</Link>
+            <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
+              <ul className="navbar-nav ml-auto">
+                <li className="nav-item">
+                  <Link className="nav-link" to="/sign-in">Login</Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/register">Register</Link>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+  
+        <div className="auth-wrapper">
+          <div className="auth-inner">
+            <Switch>
+              <Route path="/sign-in" component={SignIn} />
+              <Route path="/register" component={Registration} />
+            </Switch>
+          </div>
+        </div>
+      </div></Router>
+  );
   }
 }
 export default MyNav;
